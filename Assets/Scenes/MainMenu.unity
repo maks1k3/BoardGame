@@ -2542,6 +2542,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1885772864}
+          m_TargetAssemblyTypeName: ChooseCharacterScript, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1048256517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4388,7 +4400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1656963444
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4623,8 +4635,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.07721775, g: 0.3018868, b: 0, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 1, g: 0, b: 0, a: 1}
+    m_SelectedColor: {r: 0.93450105, g: 1, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -4826,8 +4838,9 @@ GameObject:
   - component: {fileID: 1885772859}
   - component: {fileID: 1885772861}
   - component: {fileID: 1885772862}
-  - component: {fileID: 1885772863}
   - component: {fileID: 1885772864}
+  - component: {fileID: 1885772865}
+  - component: {fileID: 1885772866}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -4900,19 +4913,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8334a6111352d4386f1e50bb2419a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1885772863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885772858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b089b6f3727794478237bc6072df209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetObject: {fileID: 0}
+  saveLoadScript: {fileID: 1885772865}
+  fadeScript: {fileID: 1907630809}
 --- !u!114 &1885772864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4936,6 +4938,32 @@ MonoBehaviour:
   inputField: {fileID: 1822986610}
   playerCount: 2
   sceneChanger: {fileID: 1885772862}
+--- !u!114 &1885772865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885772858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ea234a69bedc454db5c79a6278394a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveFileName: mansFails.json
+--- !u!114 &1885772866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885772858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b089b6f3727794478237bc6072df209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 1048256514}
 --- !u!1 &1907630807
 GameObject:
   m_ObjectHideFlags: 0
@@ -5505,7 +5533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2137560710
 RectTransform:
   m_ObjectHideFlags: 0
