@@ -15,6 +15,7 @@ public class SetActiveButtonScript : MonoBehaviour
         yield return new WaitForSeconds(delay);
         targetObject.SetActive(!targetObject.activeSelf);
         gameObject.SetActive(!gameObject.activeSelf);
+
     }
 
 }
