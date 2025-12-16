@@ -188,6 +188,8 @@ GameObject:
   - component: {fileID: 7372599274497232084}
   - component: {fileID: 5065517945272031403}
   - component: {fileID: 4621441244573474799}
+  - component: {fileID: 345225323136288741}
+  - component: {fileID: -3470266383021839085}
   m_Layer: 0
   m_Name: FallingAngel1
   m_TagString: Untagged
@@ -300,3 +302,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c8049caaae4484e8ed9e43fcfb5c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &345225323136288741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261888254109006695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c7a339894a875478b16126205e5a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fields: []
+  stepDelay: 0.3
+  moveSpeed: 6
+  currentIndex: 0
+  isMoving: 0
+--- !u!114 &-3470266383021839085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261888254109006695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a704ebb5363a01449ade50ae7cc111b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHuman: 0

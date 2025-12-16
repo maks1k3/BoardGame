@@ -188,6 +188,8 @@ GameObject:
   - component: {fileID: 3866789913581566408}
   - component: {fileID: 1410277921539796876}
   - component: {fileID: 5360373284321093223}
+  - component: {fileID: -2369459551842276496}
+  - component: {fileID: -2758088626772139538}
   m_Layer: 0
   m_Name: Warrior2
   m_TagString: Untagged
@@ -300,3 +302,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c8049caaae4484e8ed9e43fcfb5c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2369459551842276496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5815928766034698437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c7a339894a875478b16126205e5a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fields: []
+  stepDelay: 0.3
+  moveSpeed: 6
+  currentIndex: 0
+  isMoving: 0
+--- !u!114 &-2758088626772139538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5815928766034698437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a704ebb5363a01449ade50ae7cc111b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHuman: 0

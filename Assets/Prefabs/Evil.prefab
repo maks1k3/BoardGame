@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1848390936580587052}
   - component: {fileID: 4269448610299631747}
   - component: {fileID: 6077285419287527643}
+  - component: {fileID: 8402827688837536897}
+  - component: {fileID: -2900669604770297184}
   m_Layer: 0
   m_Name: Evil
   m_TagString: Untagged
@@ -124,6 +126,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c8049caaae4484e8ed9e43fcfb5c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8402827688837536897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574274262635521223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c7a339894a875478b16126205e5a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fields: []
+  stepDelay: 0.3
+  moveSpeed: 6
+  currentIndex: 0
+  isMoving: 0
+--- !u!114 &-2900669604770297184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574274262635521223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a704ebb5363a01449ade50ae7cc111b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHuman: 0
 --- !u!1 &7905547878967713052
 GameObject:
   m_ObjectHideFlags: 0
