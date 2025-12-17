@@ -11,7 +11,7 @@ public class SaveLoadScript : MonoBehaviour
     {
         public int character;
         public String characterName;
-        // Add other game state fields here
+        
     }
 
     private GameData gameData = new GameData();
@@ -35,7 +35,6 @@ public class SaveLoadScript : MonoBehaviour
             string json = File.ReadAllText(filePath);
             gameData = JsonUtility.FromJson<GameData>(json);
 
-            // Use gameData to restore game state
 
         }
         else

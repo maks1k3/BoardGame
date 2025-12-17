@@ -9,30 +9,40 @@ public class TurnManager : MonoBehaviour
     [Header("Links")]
     public DiceRollScript dice;
 
+    [Header("UI")]
+    public WinPanelUI winPanel; 
+
     private readonly List<PlayerMove> players = new();
     private int currentPlayerIndex = 0;
     private bool turnInProgress = false;
     private bool gameOver = false;
 
-
-
+    void Start()
+    {
+        if (MatchStats.Instance != null && !Application.isEditor)
+            MatchStats.Instance.StartMatch();
+    }
     void Awake()
     {
         Instance = this;
     }
 
-    // Регистрируем игроков в нужном порядке
     public void RegisterPlayersInOrder(List<PlayerMove> orderedPlayers)
     {
         players.Clear();
         players.AddRange(orderedPlayers);
 
         currentPlayerIndex = 0;
+        gameOver = false;
+
+        MatchStats.Instance?.StartMatch();
+
         StartTurn();
     }
 
     private void StartTurn()
     {
+        if (gameOver) return;
         if (players.Count == 0) return;
 
         turnInProgress = true;
@@ -42,13 +52,10 @@ public class TurnManager : MonoBehaviour
 
         dice.SetCurrentPlayer(p);
 
-        // человеку разрешаем кликать по кубику, ботам - нет
         dice.allowHumanInput = controller != null && controller.isHuman;
 
-        // сброс кубика перед ходом (по желанию)
         dice.ResetDice();
 
-        // если бот — пусть сам кинет
         if (!dice.allowHumanInput)
         {
             StartCoroutine(AIRollRoutine());
@@ -58,12 +65,12 @@ public class TurnManager : MonoBehaviour
     private IEnumerator AIRollRoutine()
     {
         yield return new WaitForSeconds(0.6f);
-        dice.RollDiceByCode(); // программный бросок
+        if (!gameOver) dice.RollDiceByCode();
     }
 
-    // вызывается, когда игрок закончил двигаться
     public void EndTurn()
     {
+        if (gameOver) return;
         if (!turnInProgress) return;
 
         turnInProgress = false;
@@ -71,14 +78,33 @@ public class TurnManager : MonoBehaviour
 
         StartTurn();
     }
+
     public void GameOver(PlayerMove winner)
     {
         if (gameOver) return;
         gameOver = true;
 
-        Debug.Log("Игра окончена! Победил: " + winner.name);
+        MatchStats.Instance?.StopMatch();
 
-        // на всякий случай запрещаем кидать кубик
+        string nickname = "Unknown";
+        NameScript ns = winner.GetComponent<NameScript>();
+        if (ns != null && !string.IsNullOrEmpty(ns.PlayerName))
+            nickname = ns.PlayerName;
+
+        float time = MatchStats.Instance != null ? MatchStats.Instance.GetElapsedSeconds() : 0f;
+        int rolls = MatchStats.Instance != null ? MatchStats.Instance.GetRolls(nickname) : 0;
+
+        Debug.Log($"Игра окончена! Победил: {nickname}, Time={time}, Rolls={rolls}");
+
         dice.allowHumanInput = false;
+
+        if (winPanel != null)
+        {
+            winPanel.Show(nickname, time, rolls);
+        }
+        else
+        {
+            Debug.LogError("WinPanelUI не назначен в TurnManager!");
+        }
     }
 }

@@ -15,11 +15,9 @@ public class PlayerScript : MonoBehaviour
     {
         characterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
 
-        // —оздали выбранного игрока
         GameObject mainCharacter = Instantiate(playerPrefabs[characterIndex], spawnPoint.transform.position, Quaternion.identity);
         mainCharacter.GetComponent<NameScript>().SetName(PlayerPrefs.GetString("PlayerName", "John"));
 
-        // помечаем как человека
         var humanCtrl = mainCharacter.GetComponent<PlayerController>();
         if (humanCtrl == null) humanCtrl = mainCharacter.AddComponent<PlayerController>();
         humanCtrl.isHuman = true;
@@ -27,7 +25,6 @@ public class PlayerScript : MonoBehaviour
         List<PlayerMove> ordered = new List<PlayerMove>();
         ordered.Add(mainCharacter.GetComponent<PlayerMove>());
 
-        // остальные игроки
         otherPlayers = new int[PlayerPrefs.GetInt("PlayerCount")];
         string[] nameArray = ReadLinesFromFile(textFileName);
 
@@ -46,7 +43,6 @@ public class PlayerScript : MonoBehaviour
             ordered.Add(otherPlayer.GetComponent<PlayerMove>());
         }
 
-        // «апускаем игру ходами
         TurnManager.Instance.RegisterPlayersInOrder(ordered);
     }
     string[] ReadLinesFromFile(string fileName)

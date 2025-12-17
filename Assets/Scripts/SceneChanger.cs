@@ -7,7 +7,6 @@ public class SceneChanger : MonoBehaviour
     public SaveLoadScript saveLoadScript;
     public FadeScript fadeScript;
 
-
     public void CloseGame()
     {
         StartCoroutine(Delay("quit", -1, ""));
@@ -17,29 +16,32 @@ public class SceneChanger : MonoBehaviour
     {
         if (string.Equals(command, "quit", System.StringComparison.OrdinalIgnoreCase))
         {
-            yield return fadeScript.FadeOut(0.1f);
+            if (fadeScript != null)
+                yield return fadeScript.FadeOut(0.1f);
+
             PlayerPrefs.DeleteAll();
 
-            if (UnityEditor.EditorApplication.isPlaying)
-            {
-                UnityEditor.EditorApplication.isPlaying = false;
-            }
-            else
-            {
-                Application.Quit();
-            }
-
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
         else if (string.Equals(command, "play", System.StringComparison.OrdinalIgnoreCase))
         {
-            yield return fadeScript.FadeOut(0.1f);
-            saveLoadScript.SaveGame(characterIndex, characterName);
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
+            if (fadeScript != null)
+                yield return fadeScript.FadeOut(0.1f);
 
+            if (saveLoadScript != null)
+                saveLoadScript.SaveGame(characterIndex, characterName);
+
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
         }
         else if (string.Equals(command, "menu", System.StringComparison.OrdinalIgnoreCase))
         {
-            yield return fadeScript.FadeOut(0.1f);
+            if (fadeScript != null)
+                yield return fadeScript.FadeOut(0.1f);
+
             SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
     }

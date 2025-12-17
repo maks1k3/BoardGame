@@ -12,15 +12,15 @@ public class DiceRollScript : MonoBehaviour
     private float forceX, forceY, forceZ;
 
     [Header("Dice State")]
-    public string diceFaceNum;         // "1".."6"
-    public bool isLanded = false;      // приземлилс€ и стоит
-    public bool firstThrow = false;    // был бросок в этом ходу
+    public string diceFaceNum;         
+    public bool isLanded = false;      
+    public bool firstThrow = false;    
 
     [Header("Turn / Input")]
     public bool allowHumanInput = true;
 
     [Header("Current Player")]
-    public PlayerMove playerMover;     // кто ходит сейчас
+    public PlayerMove playerMover;     
 
     void Awake()
     {
@@ -29,17 +29,26 @@ public class DiceRollScript : MonoBehaviour
         ResetDice();
     }
 
-    // TurnManager вызывает это в начале хода
     public void SetCurrentPlayer(PlayerMove p)
     {
         playerMover = p;
+    }
+
+    private string GetCurrentNickname()
+    {
+        if (playerMover == null) return "Unknown";
+
+        NameScript ns = playerMover.GetComponent<NameScript>();
+        if (ns != null && !string.IsNullOrEmpty(ns.PlayerName))
+            return ns.PlayerName;
+
+        return playerMover.gameObject.name;
     }
 
     void Update()
     {
         if (playerMover == null) return;
 
-        //  лик по кубику Ч только если это ход человека
         if (allowHumanInput && Input.GetMouseButtonDown(0) && (isLanded || !firstThrow))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -48,12 +57,14 @@ public class DiceRollScript : MonoBehaviour
                 if (hit.collider != null && hit.collider.gameObject == gameObject)
                 {
                     RollDice();
+
+                    MatchStats.Instance?.AddRoll(GetCurrentNickname());
+
                     firstThrow = true;
                 }
             }
         }
 
-        //  огда кубик остановилс€ и бросок был Ч двигаем игрока
         if (isLanded && firstThrow)
         {
             if (int.TryParse(diceFaceNum, out int steps))
@@ -61,19 +72,20 @@ public class DiceRollScript : MonoBehaviour
                 if (!playerMover.isMoving)
                 {
                     playerMover.MoveBySteps(steps);
-                    firstThrow = false; // чтобы второй раз не запускать движение
+                    firstThrow = false; 
                 }
             }
         }
     }
 
-    // Ѕросок из кода (дл€ ботов)
     public void RollDiceByCode()
     {
-        // чтобы бот не мог бросать, пока кубик ещЄ в движении
         if (!firstThrow && (isLanded || rBody.isKinematic))
         {
             RollDice();
+
+            MatchStats.Instance?.AddRoll(GetCurrentNickname());
+
             firstThrow = true;
         }
     }
@@ -81,7 +93,6 @@ public class DiceRollScript : MonoBehaviour
     private void RollDice()
     {
         isLanded = false;
-
         rBody.isKinematic = false;
 
         forceX = Random.Range(0, maxRandForcVal);
@@ -114,7 +125,6 @@ public class DiceRollScript : MonoBehaviour
             return;
         }
 
-        // ѕроверка победы: выигрыш только если ќ—“јЌќ¬»Ћ—я на последней клетке
         if (playerMover.fields != null && playerMover.fields.Length > 0)
         {
             int lastIndex = playerMover.fields.Length - 1;
